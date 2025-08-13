@@ -1,46 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="style.css">
-</head>
+<% layout('/layouts/boilerplate') %>
 <body>
-    <header>
-        <h1 class="head">All Lists</h1>
-        <button id="btn">Dark</button>
-        <form action="/listings/new" method="get">
-            <button>Create New Listing</button>
-        </form>
-    </header>
-    <% for(let list of lists){ %>
-        <div class="card">
-            <img src="<%= list.image%>" alt="" class="img"><br>
-            <a class="link" id="link" href="/listings/<%=list._id%>">
-               <%= list.title  %>
-            </a>
-        </div>
-    <% } %>
-<script>
-    let btn = document.querySelector("#btn");
-    let body = document.querySelector("body");
-    
+  
+        <h1 class="head">All Listings</h1>
+   <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1">
+    <% for(let list of lists){%>
+        <a href="/listings/<%= list._id %>" class="listing-link">
+            <!-- CARD -->
+            <div class="card col">
+                <img src="<%=list.image%>" class="card-img-top" alt="Listing_image" style="height: 20rem;">
+                <div class="card-img-overlay">abcd</div>
+                <div class="card-body">
+                    <p class="card-text">
+                       <b><%=list.title %></b>  <br>
+                        &#8377; <%=list.price.toLocaleString("en-IN")%>/night
+                    </p>
+                </div>
+            </div>
+        </a>
+     <% } %>
+    </div>
 
-btn.addEventListener("click",()=>{
 
-    if(btn.innerText == "Dark"){
-        body.style.backgroundColor="black";    
-        btn.innerText = "Light";
-        body.style.color="white";
-        
-        }
-    else{
-            btn.innerText = "Dark";
-            body.style.backgroundColor="";
-            body.style.color="black";
-            }
-});
-</script>
+    <!-- <% for(let list of lists){ %>
+       <ul>
+          
+            <li>
+                <a class="link" id="link" href="/listings/<%=list._id%>"><%= list.title  %></a>
+            </li>
+       </ul>
+            <% } %> -->
+
 </body>
-</html>
